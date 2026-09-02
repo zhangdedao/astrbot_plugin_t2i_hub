@@ -7,11 +7,10 @@ version: 1.0.0
 author: zhangdedao
 repo: https://github.com/zhangdedao/astrbot_plugin_t2i_hub
 astrbot_version: ">=4.27.0"
-category: ai_tools
+category: 工具
 support_platforms:
   - aiocqhttp                # QQ（OneBot v11 / NapCat）
   - qq_official              # QQ 官方机器人
-social_link: https://github.com/zhangdedao
 tags:
   - 文生图
   - 图像生成

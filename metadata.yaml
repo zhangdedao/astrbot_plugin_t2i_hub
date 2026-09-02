@@ -1,0 +1,16 @@
+name: astrbot_plugin_t2i_hub # 这是你的插件的唯一识别名。
+display_name: T2I Hub 通用文生图 # 插件市场展示名称
+short_desc: 阿里云百炼多模型额度耗尽自动降级 · 自然语言触发词 · 副脑提示词优化 # 紧凑 UI 使用的短描述
+desc: 通用文生图插件，支持阿里云百炼多模型额度耗尽自动降级、自然语言触发词、副脑提示词优化 # 插件简短描述
+help: 支持阿里百炼（wan2.x-image / qwen-image 系列，多模型额度耗尽自动降级）、智谱AI、百度千帆、PPIO、火山引擎（豆包）、科大讯飞等服务商。使用方法：/tti <描述文字> 自动选择供应商生成图片，或使用 /tti-tongyi、/tti-zhipu、/tti-qianfan、/tti-ppio、/tti-huoshan、/tti-xunfei 指定供应商；支持 --model xxx 强制指定模型；可开启自然语言触发词直接绘图；可开启副脑自动优化提示词；支持 Agent function-call 调用绘图。 # 插件的帮助信息
+version: 1.0.0 # 插件版本号，遵循语义化版本规范（https://semver.org/lang/zh-CN/）
+author: zhangdedao # 作者
+repo: https://github.com/zhangdedao/astrbot_plugin_t2i_hub # 插件的仓库地址
+astrbot_version: ">=4.27.0" # 支持的 AstrBot 版本范围
+social_link: https://github.com/zhangdedao # 个人主页 / GitHub 主页
+tags: # 标签列表，用于插件市场分类和搜索
+  - 文生图
+  - 图像生成
+  - 阿里云百炼
+  - 额度降级
+  - t2i

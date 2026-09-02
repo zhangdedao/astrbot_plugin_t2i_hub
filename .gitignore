@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 编辑器 / 系统
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 打包产物（发布用 zip 不入库，避免体积膨胀）
+*.zip
+
+# 历史遗留草稿配置（AstrBot 不会读取）
+tmp.json

@@ -1,0 +1,212 @@
+{
+  "default_width": {
+    "type": "int",
+    "default": 512,
+    "description": "默认图片宽度（像素）",
+    "obvious_hint": true,
+    "hint": "‼️⚠️重要提醒：不是所有模型支持2048*2048，报InvalidParameter参数错误不会自动降级尺寸，请手动改为1024*1024。格式示例：2048*2048、1024*1024、1280*720。本项只填数字（宽），与下方「默认图片高度」组合生效。"
+  },
+  "default_height": {
+    "type": "int",
+    "default": 512,
+    "description": "默认图片高度（像素）",
+    "hint": "与上方「默认图片宽度」共同决定出图尺寸，对全部服务商生效。阿里云百炼会按「宽*高」自动映射，例如 512x512 → 1024*1024、2048x2048 → 2048*2048、1280x720 → 1280*720。智谱 / 千帆 / PPIO / 火山 / 讯飞沿用原项目的映射规则。"
+  },
+  "completion_message": {
+    "type": "string",
+    "default": "图片生成完成~",
+    "description": "出图成功后追加发送的提示语",
+    "hint": "图片生成成功后，bot 会额外发送这条消息给用户。留空则不发送（仅出图，不附加任何文字）。"
+  },
+  "enable_auto_fallback": {
+    "type": "bool",
+    "default": true,
+    "description": "【功能1】多模型额度耗尽自动降级总开关",
+    "hint": "开启后，按下方模型优先级列表逐个尝试；仅当接口返回「额度耗尽(quota exhausted)」时才自动切换下一个模型。401鉴权失败、参数非法、模型不存在不会降级，会直接报错。"
+  },
+  "model_priority_list": {
+    "type": "list",
+    "default": [
+      "wan2.7-image-pro",
+      "wan2.7-image",
+      "wan2.6-image",
+      "qwen-image-2.0-pro",
+      "qwen-image-2.0",
+      "qwen-image-plus",
+      "qwen-image-max"
+    ],
+    "items": {
+      "type": "string"
+    },
+    "description": "【功能1】文生图模型优先级列表（严格按顺序尝试）",
+    "hint": "每行一个阿里云百炼纯文生图模型名。排在前面的模型免费额度耗尽后，自动切换到下一个。"
+  },
+  "enable_custom_trigger": {
+    "type": "bool",
+    "default": false,
+    "description": "【功能2】自定义自然语言触发词总开关",
+    "hint": "开启后，用户消息以触发词开头即可直接绘图，无需斜杠命令。采用 AstrBot 标准事件机制，不拦截其它插件。⚠️自然语言触发词受 AstrBot 全局唤醒设置约束，未唤醒的消息不会触发绘图。"
+  },
+  "trigger_words": {
+    "type": "list",
+    "default": [
+      "豆包帮我生成",
+      "帮我画"
+    ],
+    "items": {
+      "type": "string"
+    },
+    "description": "【功能2】自然语言触发词列表",
+    "hint": "用户消息以其中任意一个开头即触发绘图，触发词之后的全部文本作为绘图描述。注意：需保证机器人能被唤醒（@机器人 / 唤醒前缀 / 响应所有消息）。"
+  },
+  "enable_optimizer": {
+    "type": "bool",
+    "default": false,
+    "description": "【功能3】副脑提示词优化总开关",
+    "hint": "开启后，绘图前先调用一个 LLM 把中文描述优化为高质量英文绘图提示词。副脑超时或失败不影响绘图。"
+  },
+  "optimizer_provider_id": {
+    "type": "string",
+    "default": "",
+    "description": "【功能3】副脑使用的模型提供商",
+    "_special": "select_provider",
+    "hint": "留空则自动使用当前会话正在使用的对话模型。"
+  },
+  "optimizer_system_prompt": {
+    "type": "text",
+    "default": "你是AI绘图提示词优化专家，将用户中文描述转换为高质量英文绘图正向提示词。\n只输出优化后的提示词正文，不要任何解释，不要多余对话。\n丰富光影、画风、材质、细节描述，不要输出负面提示词。",
+    "description": "【功能3】副脑系统提示词（可自定义）",
+    "hint": "决定副脑「怎么改写」你的描述。建议保持默认；若要自定义，务必保留「只输出提示词正文、不要解释」这类约束，否则副脑会把说明文字一起吐出来，被当成画面内容导致出图跑偏。"
+  },
+  "optimizer_timeout": {
+    "type": "int",
+    "default": 30,
+    "description": "【功能3】副脑调用超时时间（秒）",
+    "hint": "超时后自动放弃优化、改用原始描述继续绘图，不会中断出图。建议 15~60 秒，默认 30 秒足够；若拿推理型慢模型当副脑可调到 60。"
+  },
+  "optimizer_temperature": {
+    "type": "float",
+    "default": 0.8,
+    "description": "【功能3】副脑采样温度",
+    "hint": "控制副脑扩写的发散程度，取值 0~2，默认 0.8，建议区间为 0.3~1.0。"
+  },
+  "tongyi_api_key": {
+    "type": "string",
+    "default": "",
+    "description": "阿里云百炼（DashScope）API密钥"
+  },
+  "tongyi_base_url": {
+    "type": "string",
+    "default": "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+    "description": "阿里云百炼统一文生图接口地址",
+    "hint": "wan2.x-image / qwen-image 系列纯文生图模型统一端点，一般无需修改"
+  },
+  "tongyi_model": {
+    "type": "string",
+    "default": "wan2.7-image-pro",
+    "description": "阿里云百炼模型名称",
+    "hint": "仅在【功能1】自动降级总开关「关闭」时生效。"
+  },
+  "tongyi_watermark": {
+    "type": "bool",
+    "default": false,
+    "description": "是否给生成图片添加水印",
+    "hint": "开启后阿里云会在图片右下角打上「AI 生成」标识水印。默认关闭。仅对阿里云百炼生效，不影响其它服务商。"
+  },
+  "tongyi_timeout": {
+    "type": "int",
+    "default": 120,
+    "description": "阿里云百炼单次请求超时时间（秒）",
+    "hint": "高分辨率出图较慢，建议不低于 120 秒"
+  },
+  "zhipu_api_key": {
+    "type": "string",
+    "default": "",
+    "description": "智谱AI API密钥"
+  },
+  "zhipu_base_url": {
+    "type": "string",
+    "default": "https://open.bigmodel.cn/api/paas/v4",
+    "description": "智谱AI API基础URL"
+  },
+  "zhipu_model": {
+    "type": "string",
+    "default": "cogview-4-250304",
+    "description": "智谱AI模型名称"
+  },
+  "qianfan_access_token": {
+    "type": "string",
+    "default": "",
+    "description": "百度千帆访问令牌",
+    "hint": "⚠️注意这里要填 access_token，不是 API Key / Secret Key，填错会报鉴权失败。"
+  },
+  "qianfan_model": {
+    "type": "string",
+    "default": "flux.1-schnell",
+    "description": "千帆模型名称"
+  },
+  "qianfan_steps": {
+    "type": "int",
+    "default": 4,
+    "description": "千帆生成步数",
+    "hint": "扩散迭代步数，越大细节越精细但越慢。⚠️仅当上方模型为 flux.1-schnell 时才会下发，其它模型会忽略本项。flux.1-schnell 属于蒸馏加速模型，建议 4~8，调太大不会更好看只会更慢。"
+  },
+  "ppio_api_key": {
+    "type": "string",
+    "default": "",
+    "description": "PPIO API密钥"
+  },
+  "ppio_base_url": {
+    "type": "string",
+    "default": "https://api.ppinfra.com",
+    "description": "PPIO API基础URL"
+  },
+  "ppio_model": {
+    "type": "string",
+    "default": "sd15",
+    "description": "PPIO模型名称"
+  },
+  "ppio_steps": {
+    "type": "int",
+    "default": 20,
+    "description": "PPIO生成步数",
+    "hint": "扩散迭代步数，越大细节越精细但耗时越长。建议 20~30；低于 15 容易出现画面糊、结构错乱。"
+  },
+  "ppio_guidance_scale": {
+    "type": "float",
+    "default": 7.5,
+    "description": "PPIO引导比例",
+    "hint": "提示词约束强度（CFG），控制画面对描述的贴合度。建议 5~9。"
+  },
+  "volcengine_api_key": {
+    "type": "string",
+    "default": "",
+    "description": "火山引擎API密钥"
+  },
+  "volcengine_base_url": {
+    "type": "string",
+    "default": "https://ark.cn-beijing.volces.com/api/v3",
+    "description": "火山引擎API基础URL"
+  },
+  "volcengine_model": {
+    "type": "string",
+    "default": "doubao-seedream-3-0-t2i-250415",
+    "description": "火山引擎模型名称",
+    "hint": "填豆包文生图模型名或你自己创建的推理接入点 ID（ep-xxxx）。默认 doubao-seedream-3-0-t2i-250415。"
+  },
+  "xunfei_app_id": {
+    "type": "string",
+    "default": "",
+    "description": "科大讯飞应用ID"
+  },
+  "xunfei_api_key": {
+    "type": "string",
+    "default": "",
+    "description": "科大讯飞API密钥"
+  },
+  "xunfei_api_secret": {
+    "type": "string",
+    "default": "",
+    "description": "科大讯飞API密钥（Secret）"
+  }
+}

@@ -1,0 +1,82 @@
+================================================================================
+UPSTREAM COMPONENT NOTICE / 上游组件声明
+================================================================================
+
+本文件是 astrbot_plugin_t2i_hub 的第三方组件与许可声明。
+项目主许可证见 LICENSE 文件（MIT）。
+
+This file documents the third-party components and licensing declarations for
+astrbot_plugin_t2i_hub. The primary license of this project is in the LICENSE
+file (MIT).
+
+
+--------------------------------------------------------------------------------
+1. 本项目自身的许可范围 / Scope of the MIT license
+--------------------------------------------------------------------------------
+
+The MIT License (LICENSE file) covers the secondary-development (二开) portion of
+this project, authored by zhangdedao: multi-model quota-exhaustion auto-fallback,
+custom natural-language trigger words, the sub-brain prompt optimizer, and the
+related bug fixes and UX improvements.
+
+上面这份 MIT 许可证覆盖本项目的二次开发部分（作者 zhangdedao）：多模型额度耗尽
+自动降级、自然语言触发词、副脑提示词优化，以及相关的缺陷修复与体验优化。
+
+
+--------------------------------------------------------------------------------
+2. 上游项目 / Upstream project
+--------------------------------------------------------------------------------
+
+This project is a derivative work derived from the open-source project:
+
+    astrbot_plugin_txsc
+    https://github.com/zhuiye8/astrbot_plugin_txsc
+    Original author / 原作者: zhuiye
+
+本项目派生自上述开源项目，其中沿用了上游的多厂商文生图基础能力代码（智谱 / 千帆 /
+PPIO / 火山引擎 / 科大讯飞 / OpenAI / Gemini / xAI 等 Provider，以及插件骨架）。
+上游代码的版权归原作者 zhuiye 所有。
+
+
+--------------------------------------------------------------------------------
+3. 上游许可冲突 / License conflict in the upstream project
+--------------------------------------------------------------------------------
+
+*** IMPORTANT / 重要 ***
+
+The upstream project declares TWO conflicting licenses:
+
+  (1) Its README states: "本项目采用MIT许可证。" (This project uses the MIT License.)
+  (2) The LICENSE file shipped in its repository is the full text of the
+      GNU AFFERO GENERAL PUBLIC LICENSE Version 3 (AGPL-3.0), carrying the
+      copyright line "Copyright (C) 2022-2099 AstrBot Plugin Authors".
+      GitHub's own license detection reports the upstream repository as
+      AGPL-3.0.
+
+上游项目的许可声明存在冲突：其 README 声称采用 MIT 许可证，但其仓库中随包分发的
+LICENSE 文件实为 GNU AGPL-3.0 全文（GitHub 官方检测亦判定该仓库为 AGPL-3.0）。
+据推断，该 AGPL-3.0 文件大概率为 AstrBot 插件脚手架所带、原作者未作替换。
+
+THIS DERIVATIVE PROJECT ELECTS TO FOLLOW THE UPSTREAM README'S MIT DECLARATION.
+本二开项目选择按上游 README 的 MIT 声明执行，即视上游代码以 MIT 许可证授权。
+
+Accordingly, and in order to fully preserve the upstream license text as
+required, the upstream LICENSE file is retained in this repository VERBATIM,
+without a single byte modified, at:
+
+    third_party/LICENSE-astrbot_plugin_txsc-AGPL-3.0.txt
+
+为完整履行"保留原始 LICENSE 文件"的义务，上游 LICENSE 文件已原样保留在本仓库上述
+路径（34,531 字节，未作任何修改）。
+
+IF THE UPSTREAM AUTHOR CONFIRMS THAT AGPL-3.0 IS THE INTENDED LICENSE, this
+project will be relicensed accordingly, since AGPL-3.0 is a strong copyleft
+license that requires the entire derivative work to remain under AGPL-3.0.
+
+若原作者确认 AGPL-3.0 才是其真实意图，本项目将相应变更许可 —— 因为 AGPL-3.0 属强
+传染性协议，要求衍生作品整体继续沿用 AGPL-3.0。
+
+An issue has been filed on the upstream repository requesting clarification
+(as of 2026-09-02, no response has been received yet).
+
+已在上游仓库提交 issue 请求澄清上述冲突（截至 2026-09-02 尚未收到回复）。

@@ -4,7 +4,7 @@ short_desc: 文生图、免费额度耗尽自动切换、自定义触发词、�
 desc: |
   基于astrbot_plugin_txsc二开的AstrBot文生图插件，支持了模型用完免费额度就自行切换的功能，可以很方便的白嫖千问平台的新人试用福利。
   同时增加了自定义唤醒词与副脑优化提示词这两个实用功能，让文生图功能更加易用。
-version: 1.0.0
+version: 1.0.1
 author: zhangdedao
 social_link: https://github.com/zhangdedao
 repo: https://github.com/zhangdedao/astrbot_plugin_t2i_hub
